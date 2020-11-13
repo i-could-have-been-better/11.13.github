@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言框</title>
+</head>
+<script src="vue/vue.js"></script>
+<body>
+
+    <div id="app">
+        <div class="container">
+            <div>
+                <input type="text" v-model="message" :value="message">
+                <button @click="AddList">留言</button>
+
+            </div>
+            <div class="mesList">
+                <div v-for="(item,index) in list">
+                    <span>第{{index+1}}条留言：</span>
+                    <span>{{item}}</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            message:'',
+            list:[]
+        },
+        methods:{
+            AddList(){
+                this.list.push(this.message);
+                console.log(this.list);
+                this.message = '';
+            }
+        }
+    })
+
+
+</script>
+
+
+
+</body>
+</html>

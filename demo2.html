@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态组件</title>
+</head>
+<script src="vue/vue.js"></script>
+<link rel="stylesheet" type="text/css" href="index.css">
+<body>
+    <div id="app">
+        <div class="container">
+            <span v-for="item in btndos">
+                <input class="btn" type="button" :value="item" @click="btnClick"/>
+            </span>
+            <div class="content">
+<!--                <component :is="dos" :title="dos"></component>-->
+                <home v-bind:title="dos"></home>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        //注册全局组件
+         Vue.component("home",{
+             props:["title"],
+            template:`
+                    <span>
+                         <img :src="'img/'+title+'.jpg'" class="img">
+                    </span>
+                 `
+        })
+
+        // Vue.component("list",{
+        //     template:`
+        //         <div id="componment01">
+        //             <div>
+        //                 <img :src="'img/'+title">
+        //             </div>
+        //         </div>
+        //     `,
+        //     props:["title"]
+        // })
+        //
+        // Vue.component("pag",{
+        //     template:`
+        //         <div id="componment01">
+        //             <div>
+        //                 {{title}}
+        //             </div>
+        //         </div>
+        //     `,
+        //     props:["title"]
+        // })
+
+        const app = new Vue({
+            el:"#app",
+            data:{
+                dos:"love1",
+                btndos:["love1","love2","love3"]
+            },
+            methods:{
+                btnClick(event){
+                    this.dos = event.target.value.toLowerCase();
+                    console.log( event.target.value)
+                }
+            }
+        })
+
+
+    </script>
+
+
+</body>
+</html>
